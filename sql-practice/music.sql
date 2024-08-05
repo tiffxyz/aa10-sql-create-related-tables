@@ -11,9 +11,17 @@ CREATE TABLE bands (
 CREATE TABLE musicians (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
   first_name VARCHAR(100) NOT NULL,
-  last_name VARCHAR(100)
+  last_name VARCHAR(100),
+  band_name VARCHAR(100),
+  FOREIGN KEY (band_name) REFERENCES bands(name) ON DELETE CASCADE
 );
 CREATE TABLE instruments (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
-  type VARCHAR(100) NOT NULL
+  type VARCHAR(100) NOT NULL,
+  player VARCHAR(100) NOT NULL
 );
+
+SELECT musicians.band_name, instruments.player, instruments.type
+FROM    instruments
+JOIN    musicians
+ON      instruments.player = musicians.first_name
